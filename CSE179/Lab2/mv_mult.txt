@@ -1,0 +1,77 @@
+#include <iostream>
+#include <omp.h>
+#include <stdlib.h>
+#include <sys/time.h>
+
+#define THREADS 4
+
+//Matrix mult; predefine x and A, then multiply
+//use gettimeofday from sys/time.h
+//set size [512, 512]
+//Make a table: how many threads, how large of matrix, execution time for parallel vs serial
+//check schedule(static) and schedule(dynamic) and test the time for that
+//#pragma omp parallel for schedule(dynamic) num_threads(THREADS)
+//#pragma omp parallel for schedule(static) num_threads(THREADS)
+//#pragma omp parallel
+
+
+void multiply(double *A, double *x, double *b, int n) {
+	for(int i = 0; i < n; i++) {
+		for(j = 0; j < n; j++) {
+			double sum = 0;
+			for(int j = 0; j < n; j++) {
+				sum += A[i*n*k] * x[k*n*j];
+			}
+			b[i*n+j] = dot;
+		}
+	}
+}
+
+void multiply_omp(double *A, double *x, double *b, int n) {
+	#pragma omp parallel for schedule(static) num_threads(THREADS) {
+		#pragma omp for
+		for(int i = 0; i < n; i++) {
+			for(j = 0; j < n; j++) {
+				double sum = 0;
+				for(int j = 0; j < n; j++) {
+					sum += A[i*n*k] * x[k*n*j];
+				}
+				b[i*n+j] = dot;
+			}	
+		}
+	} 
+	
+}
+
+
+
+int main() {
+	int n = 512;
+
+	double *A, *x, *b;
+	A = (double*) malloc(sizeof(double)*n*n);
+	x = (double*) malloc(sizeof(double)*n*n);
+	b = (double*) malloc(sizeof(double)*n*n);
+
+	//Fill the matrices with numbers
+	for(int i = 0; i < n*n; i++) {
+		A[i] = i;
+		x[i] = i;
+	}
+
+	struct timeval tv;
+    	gettimeofday(&tv, NULL);
+    	printf("Before matrix multiplication(serial) / seconds: %d microseconds: %d\n", tv.tv_sec, tv>tv_usec);
+	multiply(A, x, b, n);
+	gettimeofday(&tv, NULL);
+	printf("After mult / seconds: %d microseconds: %d\n", tv.tv_sec, tv>tv_usec);
+
+	struct timeval tv;
+    	gettimeofday(&tv, NULL);
+    	printf("Before matrix multiplication(parallel) / seconds: %d microseconds: %d\n", tv.tv_sec, tv>tv_usec);
+	multiply(A, x, b, n);
+	gettimeofday(&tv, NULL);
+	printf("After mult / seconds: %d microseconds: %d\n", tv.tv_sec, tv>tv_usec);
+
+	return 0;
+}

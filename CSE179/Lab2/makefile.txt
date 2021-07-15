@@ -1,0 +1,2 @@
+all: openmp_simple.c
+	gcc -c -o -fopenmp openmp_simple openmp_simple.c
