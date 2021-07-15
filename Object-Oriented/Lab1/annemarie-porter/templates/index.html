@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hello World</title>
+
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <script src="jquery/jquery.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1>Calculator</h1>
+        <div class = "row">
+            <div class="col">
+                <h4>Enter two numbers</h4>
+                <div class="row"  style="margin-top: 15px;">
+                    <input class="form-control" id="lhs">
+                </div>
+                <div class="row" style="margin-top: 15px;">
+                    <input class="form-control" id="rhs">
+                </div>
+            </div>
+            <div class="col">
+                <h4>Choose an operation</h4>
+                <div class="row" style="margin-top: 15px;">
+                    <div class = "col">
+                        <button class="btn btn-primary form-control" id="plus_btn">+</button>
+                    </div>
+                    <div class = "col">
+                        <button class="btn btn-danger form-control" id="sub_btn">-</button>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 15px;">
+                    <div class = "col">
+                        <button class="btn btn-warning form-control" id="mult_btn">*</button>
+                    </div>
+                    <div class = "col">
+                        <button class="btn btn-success form-control" id="div_btn">/</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col">
+                <div id="ans_area" style="font-size: 22px;"> 
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
